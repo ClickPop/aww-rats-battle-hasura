@@ -1,0 +1,135 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum RAT_TYPE {
+  LAB
+  PACK
+  PET
+  STREET
+}
+
+enum RATTRIBUTES {
+  CUNNING
+  CUTENESS
+  RATTITUDE
+}
+
+enum ENCOUNTER_TYPE {
+  SOLO
+  COMMUNITY_RAID
+  FACTION_RAID
+}
+
+model Player {
+  id                 String                   @id @unique
+  energy             Int                      @default(0)
+  max_energy         Int                      @default(0)
+  xp                 Int                      @default(0)
+  level              Int                      @default(1)
+  create_at          DateTime                 @default(now())
+  updated_at         DateTime                 @default(now()) @updatedAt
+  solo_encounters    Solo_Encounter_Results[]
+  raid_contributions Raid_Contribution[]
+  gauntlet_attempts  Gauntlet_Attempts[]
+}
+
+model Encounter {
+  id                Int                         @id @default(autoincrement())
+  energy_cost       Int
+  power             Int
+  encounter_type    ENCOUNTER_TYPE
+  name              String
+  description       String?
+  win_text          String?
+  loss_text         String?
+  image             String?
+  max_rats          Int
+  rat_constraints   Encounter_Rat_Constraints[]
+  solo_results      Solo_Encounter_Results[]
+  raids             Raid[]
+  gauntlets         Gauntlet_Encounters[]
+  gauntlet_attempts Gauntlet_Attempts[]
+}
+
+model Encounter_Rat_Constraints {
+  encounter    Encounter @relation(fields: [encounter_id], references: [id])
+  encounter_id Int
+  rat_type     RAT_TYPE
+  locked_slots Int
+
+  @@id([encounter_id, rat_type])
+}
+
+model Solo_Encounter_Results {
+  player              Player    @relation(fields: [player_id], references: [id])
+  player_id           String
+  encounter           Encounter @relation(fields: [encounter_id], references: [id])
+  encounter_id        Int
+  result              Boolean
+  completed_timestamp DateTime
+
+  @@id([player_id, encounter_id])
+}
+
+model Raid {
+  id                   Int                 @id @default(autoincrement())
+  encounter            Encounter           @relation(fields: [encounter_id], references: [id])
+  encounter_id         Int
+  raid_contributions   Raid_Contribution[]
+  faction_raid         Boolean             @default(false)
+  result               Boolean?
+  raid_start_timestamp DateTime
+  raid_end_timestamp   DateTime
+}
+
+model Raid_Contribution {
+  player       Player  @relation(fields: [player_id], references: [id])
+  player_id    String
+  raid         Raid    @relation(fields: [raid_id], references: [id])
+  raid_id      Int
+  contribution Int
+  faction      String?
+
+  @@id([player_id, raid_id])
+}
+
+model Gauntlet {
+  id          Int                   @id @default(autoincrement())
+  encounters  Gauntlet_Encounters[]
+  description String?
+  win_text    String?
+  loss_text   String?
+  image       String?
+  attempts    Gauntlet_Attempts[]
+}
+
+model Gauntlet_Encounters {
+  gauntlet     Gauntlet  @relation(fields: [gauntlet_id], references: [id])
+  gauntlet_id  Int
+  encounter    Encounter @relation(fields: [encounter_id], references: [id])
+  encounter_id Int
+  position     Int
+
+  @@id([gauntlet_id, encounter_id])
+}
+
+model Gauntlet_Attempts {
+  gauntlet                    Gauntlet  @relation(fields: [gauntlet_id], references: [id])
+  gauntlet_id                 Int
+  player                      Player    @relation(fields: [player_id], references: [id])
+  player_id                   String
+  result                      Boolean?
+  last_attempted_encounter    Encounter @relation(fields: [last_attempted_encounter_id], references: [id])
+  last_attempted_encounter_id Int
+
+  @@id([gauntlet_id, player_id])
+}

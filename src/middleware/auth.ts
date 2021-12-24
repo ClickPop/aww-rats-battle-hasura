@@ -2,7 +2,7 @@ import {RequestHandler} from 'express';
 
 export const authMiddleware: RequestHandler = async (req, res, next) => {
   try {
-    const cookie = req.signedCookies.auth;
+    const cookie = req.signedCookies.wallet;
     res.cookie('wallet', cookie, {
       maxAge: 1000 * 60 * 60 * 24 * 7,
       secure: process.env.NODE_ENV === 'prod',

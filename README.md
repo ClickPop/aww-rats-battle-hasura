@@ -28,4 +28,6 @@ Any time you make a change to the prisma schema make sure to run `prisma migrate
 
 ## Folder structure
 
-Any serverless functions need to be written in `src/functions` folder, but be sure to add it to the `src/index.ts` file as a route on the internal express app, as this is how local development is handled
+The way we are handling this is by including a file in the `src/functions` directory for each set of routes. For instance, all the routes related to players will be in the `src/functions/players.ts` file.
+
+Inside this file we create a new Express app, add the required routes/middleware, then export that app as a named export.

@@ -17,7 +17,7 @@ enum RAT_TYPE {
   STREET
 }
 
-enum RATTRIBUTES {
+enum RATTRIBUTE {
   CUNNING
   CUTENESS
   RATTITUDE
@@ -53,11 +53,16 @@ model Encounter {
   loss_text         String?
   image             String?
   max_rats          Int
+  weaknesses        RATTRIBUTE[]
+  resistances       RATTRIBUTE[]
   rat_constraints   Encounter_Rat_Constraints[]
   solo_results      Solo_Encounter_Results[]
   raids             Raid[]
   gauntlets         Gauntlet_Encounters[]
   gauntlet_attempts Gauntlet_Attempts[]
+  reward            Reward?                     @relation(fields: [rewardId], references: [id])
+  rewardId          Int?
+  active            Boolean                     @default(false)
 }
 
 model Encounter_Rat_Constraints {
@@ -70,14 +75,13 @@ model Encounter_Rat_Constraints {
 }
 
 model Solo_Encounter_Results {
+  id                  Int       @id @default(autoincrement())
   player              Player    @relation(fields: [player_id], references: [id])
   player_id           String
   encounter           Encounter @relation(fields: [encounter_id], references: [id])
   encounter_id        Int
   result              Boolean
-  completed_timestamp DateTime
-
-  @@id([player_id, encounter_id])
+  completed_timestamp DateTime  @default(now())
 }
 
 model Raid {
@@ -89,15 +93,19 @@ model Raid {
   result               Boolean?
   raid_start_timestamp DateTime
   raid_end_timestamp   DateTime
+  reward               Reward              @relation(fields: [rewardId], references: [id])
+  rewardId             Int
+  active               Boolean             @default(false)
 }
 
 model Raid_Contribution {
-  player       Player  @relation(fields: [player_id], references: [id])
-  player_id    String
-  raid         Raid    @relation(fields: [raid_id], references: [id])
-  raid_id      Int
-  contribution Int
-  faction      String?
+  player                 Player   @relation(fields: [player_id], references: [id])
+  player_id              String
+  raid                   Raid     @relation(fields: [raid_id], references: [id])
+  raid_id                Int
+  contribution           Int
+  faction                String?
+  contribution_timestamp DateTime @default(now())
 
   @@id([player_id, raid_id])
 }
@@ -110,6 +118,9 @@ model Gauntlet {
   loss_text   String?
   image       String?
   attempts    Gauntlet_Attempts[]
+  reward      Reward                @relation(fields: [rewardId], references: [id])
+  rewardId    Int
+  active      Boolean               @default(false)
 }
 
 model Gauntlet_Encounters {
@@ -123,6 +134,7 @@ model Gauntlet_Encounters {
 }
 
 model Gauntlet_Attempts {
+  id                          Int       @id @default(autoincrement())
   gauntlet                    Gauntlet  @relation(fields: [gauntlet_id], references: [id])
   gauntlet_id                 Int
   player                      Player    @relation(fields: [player_id], references: [id])
@@ -130,6 +142,15 @@ model Gauntlet_Attempts {
   result                      Boolean?
   last_attempted_encounter    Encounter @relation(fields: [last_attempted_encounter_id], references: [id])
   last_attempted_encounter_id Int
+  completed_timestamp         DateTime?
+  started_timestamp           DateTime  @default(now())
+}
 
-  @@id([gauntlet_id, player_id])
+model Reward {
+  id           Int         @id @default(autoincrement())
+  tokens       Int
+  closetTokens String[]
+  Encounter    Encounter[]
+  Raid         Raid[]
+  Gauntlet     Gauntlet[]
 }

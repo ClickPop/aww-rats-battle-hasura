@@ -11,7 +11,7 @@ You will need the following installed on your system to get started with this re
 
 ## Setup
 
-- Run `docker-compose up` to start the Hasura GraphQL Engine and Postgres DB
+- Run `pnpm start` to start the Hasura GraphQL Engine and Postgres DB
 - Run `pnpm i` to install all deps
 - In a new terminal tab/window cd into the `local` folder then run `pnpx hasura console` to start the hasura console so any changes you make will be tracked.
   - You will need the `functions` service running locally.

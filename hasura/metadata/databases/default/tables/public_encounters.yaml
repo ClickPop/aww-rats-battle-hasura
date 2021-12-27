@@ -1,0 +1,74 @@
+table:
+  name: encounters
+  schema: public
+object_relationships:
+- name: encounterTypeByEncounterType
+  using:
+    foreign_key_constraint_on: encounter_type
+- name: reward
+  using:
+    foreign_key_constraint_on: reward_id
+array_relationships:
+- name: gauntlet_attempts
+  using:
+    foreign_key_constraint_on:
+      column: last_attempted_encounter_id
+      table:
+        name: gauntlet_attempts
+        schema: public
+- name: gauntlet_encounters
+  using:
+    foreign_key_constraint_on:
+      column: encounter_id
+      table:
+        name: gauntlet_encounters
+        schema: public
+- name: raids
+  using:
+    foreign_key_constraint_on:
+      column: encounter_id
+      table:
+        name: raids
+        schema: public
+- name: solo_encounter_results
+  using:
+    foreign_key_constraint_on:
+      column: encounter_id
+      table:
+        name: solo_encounter_results
+        schema: public
+select_permissions:
+- permission:
+    columns:
+    - active
+    - energy_cost
+    - id
+    - power
+    - reward_id
+    - description
+    - encounter_type
+    - image
+    - loss_text
+    - name
+    - win_text
+    - created_at
+    - updated_at
+    filter: {}
+  role: anonymous
+- permission:
+    columns:
+    - active
+    - energy_cost
+    - id
+    - power
+    - reward_id
+    - description
+    - encounter_type
+    - image
+    - loss_text
+    - name
+    - win_text
+    - created_at
+    - updated_at
+    filter: {}
+  role: user

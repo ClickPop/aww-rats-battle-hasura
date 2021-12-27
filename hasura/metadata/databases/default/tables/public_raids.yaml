@@ -1,0 +1,45 @@
+table:
+  name: raids
+  schema: public
+object_relationships:
+- name: encounter
+  using:
+    foreign_key_constraint_on: encounter_id
+- name: reward
+  using:
+    foreign_key_constraint_on: reward_id
+array_relationships:
+- name: raid_contributions
+  using:
+    foreign_key_constraint_on:
+      column: raid_id
+      table:
+        name: raid_contributions
+        schema: public
+select_permissions:
+- permission:
+    columns:
+    - active
+    - result
+    - encounter_id
+    - id
+    - reward_id
+    - created_at
+    - end_timestamp
+    - start_timestamp
+    - updated_at
+    filter: {}
+  role: anonymous
+- permission:
+    columns:
+    - active
+    - result
+    - encounter_id
+    - id
+    - reward_id
+    - created_at
+    - end_timestamp
+    - start_timestamp
+    - updated_at
+    filter: {}
+  role: user

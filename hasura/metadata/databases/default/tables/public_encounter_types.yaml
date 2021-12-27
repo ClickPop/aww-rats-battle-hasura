@@ -1,0 +1,23 @@
+table:
+  name: encounter_types
+  schema: public
+is_enum: true
+array_relationships:
+- name: encounters
+  using:
+    foreign_key_constraint_on:
+      column: encounter_type
+      table:
+        name: encounters
+        schema: public
+select_permissions:
+- permission:
+    columns:
+    - encounter_type
+    filter: {}
+  role: anonymous
+- permission:
+    columns:
+    - encounter_type
+    filter: {}
+  role: user

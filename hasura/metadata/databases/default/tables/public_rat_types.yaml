@@ -1,0 +1,25 @@
+table:
+  name: rat_types
+  schema: public
+is_enum: true
+array_relationships:
+- name: encounter_rat_constraints
+  using:
+    foreign_key_constraint_on:
+      column: rat_type
+      table:
+        name: encounter_rat_constraints
+        schema: public
+- name: raid_contributions
+  using:
+    foreign_key_constraint_on:
+      column: faction
+      table:
+        name: raid_contributions
+        schema: public
+select_permissions:
+- permission:
+    columns:
+    - rat_type
+    filter: {}
+  role: anonymous

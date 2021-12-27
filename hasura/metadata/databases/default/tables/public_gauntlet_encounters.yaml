@@ -1,0 +1,25 @@
+table:
+  name: gauntlet_encounters
+  schema: public
+object_relationships:
+- name: encounter
+  using:
+    foreign_key_constraint_on: encounter_id
+- name: gauntlet
+  using:
+    foreign_key_constraint_on: gauntlet_id
+select_permissions:
+- permission:
+    columns:
+    - encounter_id
+    - gauntlet_id
+    - position
+    filter: {}
+  role: anonymous
+- permission:
+    columns:
+    - encounter_id
+    - gauntlet_id
+    - position
+    filter: {}
+  role: user

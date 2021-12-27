@@ -1,0 +1,59 @@
+table:
+  name: gauntlet_attempts
+  schema: public
+object_relationships:
+- name: encounter
+  using:
+    foreign_key_constraint_on: last_attempted_encounter_id
+- name: gauntlet
+  using:
+    foreign_key_constraint_on: gauntlet_id
+- name: player
+  using:
+    foreign_key_constraint_on: player_id
+insert_permissions:
+- permission:
+    backend_only: false
+    check:
+      player_id:
+        _eq: X-Hasura-User-Id
+    columns:
+    - gauntlet_id
+    - id
+    - last_attempted_encounter_id
+    - player_id
+    - started_timestamp
+  role: user
+select_permissions:
+- permission:
+    columns:
+    - id
+    - result
+    - gauntlet_id
+    - last_attempted_encounter_id
+    - player_id
+    - completed_timestamp
+    - started_timestamp
+    filter:
+      player_id:
+        _eq: X-Hasura-User-Id
+  role: user
+update_permissions:
+- permission:
+    check:
+      player_id:
+        _eq: X-Hasura-User-Id
+    columns:
+    - completed_timestamp
+    - last_attempted_encounter_id
+    - result
+    filter:
+      player_id:
+        _eq: X-Hasura-User-Id
+  role: user
+delete_permissions:
+- permission:
+    filter:
+      player_id:
+        _eq: X-Hasura-User-Id
+  role: user

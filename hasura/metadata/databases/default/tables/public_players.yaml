@@ -1,0 +1,71 @@
+table:
+  name: players
+  schema: public
+array_relationships:
+- name: gauntlet_attempts
+  using:
+    foreign_key_constraint_on:
+      column: player_id
+      table:
+        name: gauntlet_attempts
+        schema: public
+- name: raid_contributions
+  using:
+    foreign_key_constraint_on:
+      column: player_id
+      table:
+        name: raid_contributions
+        schema: public
+- name: solo_encounter_results
+  using:
+    foreign_key_constraint_on:
+      column: player_id
+      table:
+        name: solo_encounter_results
+        schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - energy
+    - id
+    - level
+    - max_energy
+    - xp
+  role: user
+select_permissions:
+- permission:
+    columns:
+    - created_at
+    - energy
+    - id
+    - level
+    - max_energy
+    - updated_at
+    - xp
+    filter:
+      id:
+        _eq: X-Hasura-User-Id
+  role: user
+update_permissions:
+- permission:
+    check:
+      id:
+        _eq: X-Hasura-User-Id
+    columns:
+    - energy
+    - id
+    - level
+    - max_energy
+    - xp
+    filter:
+      id:
+        _eq: X-Hasura-User-Id
+  role: user
+delete_permissions:
+- permission:
+    filter:
+      id:
+        _eq: X-Hasura-User-Id
+  role: user

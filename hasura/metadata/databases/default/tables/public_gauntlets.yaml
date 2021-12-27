@@ -1,0 +1,49 @@
+table:
+  name: gauntlets
+  schema: public
+object_relationships:
+- name: reward
+  using:
+    foreign_key_constraint_on: reward_id
+array_relationships:
+- name: gauntlet_attempts
+  using:
+    foreign_key_constraint_on:
+      column: gauntlet_id
+      table:
+        name: gauntlet_attempts
+        schema: public
+- name: gauntlet_encounters
+  using:
+    foreign_key_constraint_on:
+      column: gauntlet_id
+      table:
+        name: gauntlet_encounters
+        schema: public
+select_permissions:
+- permission:
+    columns:
+    - active
+    - id
+    - reward_id
+    - description
+    - image
+    - loss_text
+    - win_text
+    - created_at
+    - updated_at
+    filter: {}
+  role: anonymous
+- permission:
+    columns:
+    - active
+    - id
+    - reward_id
+    - description
+    - image
+    - loss_text
+    - win_text
+    - created_at
+    - updated_at
+    filter: {}
+  role: user

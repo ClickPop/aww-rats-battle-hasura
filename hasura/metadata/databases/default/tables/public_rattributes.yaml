@@ -1,0 +1,15 @@
+table:
+  name: rattributes
+  schema: public
+is_enum: true
+select_permissions:
+- permission:
+    columns:
+    - rattribute
+    filter: {}
+  role: anonymous
+- permission:
+    columns:
+    - rattribute
+    filter: {}
+  role: user

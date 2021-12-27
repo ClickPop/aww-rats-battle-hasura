@@ -1,0 +1,34 @@
+table:
+  name: solo_encounter_results
+  schema: public
+object_relationships:
+- name: encounter
+  using:
+    foreign_key_constraint_on: encounter_id
+- name: player
+  using:
+    foreign_key_constraint_on: player_id
+insert_permissions:
+- permission:
+    backend_only: false
+    check:
+      player_id:
+        _eq: X-Hasura-User-Id
+    columns:
+    - completed_timestamp
+    - encounter_id
+    - player_id
+    - result
+  role: user
+select_permissions:
+- permission:
+    columns:
+    - id
+    - result
+    - encounter_id
+    - player_id
+    - completed_timestamp
+    filter:
+      player_id:
+        _eq: X-Hasura-User-Id
+  role: user

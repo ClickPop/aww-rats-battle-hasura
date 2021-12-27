@@ -1,0 +1,45 @@
+table:
+  name: raid_contributions
+  schema: public
+object_relationships:
+- name: player
+  using:
+    foreign_key_constraint_on: player_id
+- name: raid
+  using:
+    foreign_key_constraint_on: raid_id
+- name: rat_type
+  using:
+    foreign_key_constraint_on: faction
+insert_permissions:
+- permission:
+    backend_only: false
+    check:
+      player_id:
+        _eq: X-Hasura-User-Id
+    columns:
+    - contribution
+    - contribution_timestamp
+    - faction
+    - player_id
+    - raid_id
+  role: user
+select_permissions:
+- permission:
+    columns:
+    - id
+    - contribution
+    - raid_id
+    - faction
+    - player_id
+    - contribution_timestamp
+    filter:
+      player_id:
+        _eq: X-Hasura-User-Id
+  role: user
+delete_permissions:
+- permission:
+    filter:
+      player_id:
+        _eq: X-Hasura-User-Id
+  role: user

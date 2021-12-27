@@ -1,0 +1,40 @@
+table:
+  name: rewards
+  schema: public
+array_relationships:
+- name: encounters
+  using:
+    foreign_key_constraint_on:
+      column: reward_id
+      table:
+        name: encounters
+        schema: public
+- name: gauntlets
+  using:
+    foreign_key_constraint_on:
+      column: reward_id
+      table:
+        name: gauntlets
+        schema: public
+- name: raids
+  using:
+    foreign_key_constraint_on:
+      column: reward_id
+      table:
+        name: raids
+        schema: public
+select_permissions:
+- permission:
+    columns:
+    - id
+    - tokens
+    - closet_tokens
+    filter: {}
+  role: anonymous
+- permission:
+    columns:
+    - id
+    - tokens
+    - closet_tokens
+    filter: {}
+  role: user

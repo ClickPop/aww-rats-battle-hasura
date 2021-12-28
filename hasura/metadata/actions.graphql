@@ -1,0 +1,11 @@
+type Mutation {
+  login(
+    wallet: String!
+    msg: String!
+  ): LoginOutput
+}
+
+type LoginOutput {
+  authorized: Boolean!
+}
+

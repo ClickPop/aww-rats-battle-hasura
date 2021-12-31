@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cd local && docker-compose up"
+    "start": "cd local && docker-compose up",
+    "deploy": "pnpm run migrate && pnpm run metadata",
+    "deploy:dev": "cd dev && pnpm run deploy",
+    "migrate": "hasura migrate apply",
+    "metadata": "hasura migrate apply"
   },
   "repository": {
     "type": "git",

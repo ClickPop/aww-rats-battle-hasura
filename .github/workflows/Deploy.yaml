@@ -1,0 +1,32 @@
+name: 'Deploy'
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'development'
+
+jobs:
+  Deploy:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Setup Node runtime
+        uses: actions/setup-node@v2
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.24.2
+      - name: Install deps
+        run: pnpm i
+      - name: Deploy dev
+        if: ${{contains(github.ref, 'development')}}
+        run: pnpm run deploy:dev
+        env:
+          HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET_DEV }}
+      - name: Deploy prod
+        if: ${{contains(github.ref, 'main')}}
+        run: pnpm run deploy
+        env:
+          HASURA_GRAPQHL_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}

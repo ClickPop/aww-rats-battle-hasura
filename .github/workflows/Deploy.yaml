@@ -1,0 +1,26 @@
+name: 'Deploy'
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'development'
+
+jobs:
+  Deploy:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Install Hasura CLI
+        run: curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | VERSION=v2.1.1 bash
+      - name: Deploy dev
+        if: ${{contains(github.ref, 'development')}}
+        run: cd dev && hasura migrate apply && hasura metadata apply
+        env:
+          HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET_DEV }}
+      - name: Deploy prod
+        if: ${{contains(github.ref, 'main')}}
+        run: cd hasura && hasura migrate apply && hasura metadata apply
+        env:
+          HASURA_GRAPQHL_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}

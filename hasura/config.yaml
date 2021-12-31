@@ -1,0 +1,4 @@
+version: 3
+endpoint: https://aww-rats.hasura.app
+metadata_directory: ./metadata
+migrations_directory: ./migrations

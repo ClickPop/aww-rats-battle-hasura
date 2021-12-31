@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cd local && docker-compose up"
+    "start": "cd local && docker-compose up",
+    "deploy": "pnpm run migrate && pnpm run migrate metadata",
+    "deploy:dev": "cd local && pnpm run deploy",
+    "migrate": "hasura migrate apply --admin-secret=$HASURA_ADMIN_SECRET",
+    "metadata": "hasura migrate apply --admin-secret=$HASURA_ADMIN_SECRET"
   },
   "repository": {
     "type": "git",

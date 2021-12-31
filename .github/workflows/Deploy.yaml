@@ -23,4 +23,4 @@ jobs:
         if: ${{contains(github.ref, 'main')}}
         run: cd hasura && hasura migrate apply && hasura metadata apply
         env:
-          HASURA_GRAPQHL_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}
+          HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}

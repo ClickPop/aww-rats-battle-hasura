@@ -2,6 +2,9 @@ table:
   name: encounter_rat_constraints
   schema: public
 object_relationships:
+- name: encounter
+  using:
+    foreign_key_constraint_on: encounter_id
 - name: ratTypeByRatType
   using:
     foreign_key_constraint_on: rat_type

@@ -1,0 +1,23 @@
+table:
+  name: encounter_weakness
+  schema: public
+object_relationships:
+- name: encounter
+  using:
+    foreign_key_constraint_on: encounter_id
+- name: rattribute
+  using:
+    foreign_key_constraint_on: weakness
+select_permissions:
+- permission:
+    columns:
+    - encounter_id
+    - weakness
+    filter: {}
+  role: anonymous
+- permission:
+    columns:
+    - encounter_id
+    - weakness
+    filter: {}
+  role: user

@@ -16,6 +16,20 @@ array_relationships:
       table:
         name: encounter_rat_constraints
         schema: public
+- name: encounter_resistances
+  using:
+    foreign_key_constraint_on:
+      column: encounter_id
+      table:
+        name: encounter_resistance
+        schema: public
+- name: encounter_weaknesses
+  using:
+    foreign_key_constraint_on:
+      column: encounter_id
+      table:
+        name: encounter_weakness
+        schema: public
 - name: gauntlet_attempts
   using:
     foreign_key_constraint_on:

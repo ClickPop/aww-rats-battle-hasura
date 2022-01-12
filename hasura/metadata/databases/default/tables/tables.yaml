@@ -1,5 +1,7 @@
 - "!include public_encounter_rat_constraints.yaml"
+- "!include public_encounter_resistance.yaml"
 - "!include public_encounter_types.yaml"
+- "!include public_encounter_weakness.yaml"
 - "!include public_encounters.yaml"
 - "!include public_gauntlet_attempts.yaml"
 - "!include public_gauntlet_encounters.yaml"

@@ -1,0 +1,1 @@
+CREATE TABLE "public"."closet_tokens" ("token_id" bigint NOT NULL, "owner" text NOT NULL, "amount" bigserial NOT NULL, PRIMARY KEY ("token_id","owner") , FOREIGN KEY ("token_id") REFERENCES "public"."closet_pieces"("id") ON UPDATE restrict ON DELETE restrict, FOREIGN KEY ("owner") REFERENCES "public"."players"("id") ON UPDATE restrict ON DELETE restrict);

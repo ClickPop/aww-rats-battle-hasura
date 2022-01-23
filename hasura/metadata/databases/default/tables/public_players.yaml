@@ -2,6 +2,15 @@ table:
   name: players
   schema: public
 array_relationships:
+- name: closet_tokens
+  using:
+    manual_configuration:
+      column_mapping:
+        id: owner
+      insertion_order: null
+      remote_table:
+        name: closet_tokens
+        schema: public
 - name: gauntlet_attempts
   using:
     foreign_key_constraint_on:
@@ -15,6 +24,15 @@ array_relationships:
       column: player_id
       table:
         name: raid_contributions
+        schema: public
+- name: rats
+  using:
+    manual_configuration:
+      column_mapping:
+        id: owner
+      insertion_order: null
+      remote_table:
+        name: rats
         schema: public
 - name: solo_encounter_results
   using:

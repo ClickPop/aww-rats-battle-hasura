@@ -1,0 +1,11 @@
+table:
+  name: closet_pieces
+  schema: public
+array_relationships:
+- name: closet_tokens
+  using:
+    foreign_key_constraint_on:
+      column: token_id
+      table:
+        name: closet_tokens
+        schema: public

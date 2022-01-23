@@ -1,0 +1,16 @@
+table:
+  name: closet_tokens
+  schema: public
+object_relationships:
+- name: closet_piece
+  using:
+    foreign_key_constraint_on: token_id
+- name: player
+  using:
+    manual_configuration:
+      column_mapping:
+        owner: id
+      insertion_order: null
+      remote_table:
+        name: players
+        schema: public

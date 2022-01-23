@@ -1,0 +1,70 @@
+table:
+  name: rats
+  schema: public
+object_relationships:
+- name: player
+  using:
+    manual_configuration:
+      column_mapping:
+        name: id
+      insertion_order: null
+      remote_table:
+        name: players
+        schema: public
+select_permissions:
+- permission:
+    columns:
+    - id
+    - owner
+    - name
+    - description
+    - image
+    - background
+    - tail
+    - ears
+    - pet
+    - hand
+    - color
+    - markings
+    - head
+    - generation
+    - snout
+    - torso
+    - shirt
+    - eyes
+    - glasses
+    - accessory
+    - hat
+    - rattitude
+    - cunning
+    - cuteness
+    filter: {}
+  role: anonymous
+- permission:
+    columns:
+    - id
+    - cunning
+    - cuteness
+    - rattitude
+    - accessory
+    - background
+    - color
+    - description
+    - ears
+    - eyes
+    - generation
+    - glasses
+    - hand
+    - hat
+    - head
+    - image
+    - markings
+    - name
+    - owner
+    - pet
+    - shirt
+    - snout
+    - tail
+    - torso
+    filter: {}
+  role: user

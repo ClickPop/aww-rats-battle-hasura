@@ -1,1 +1,8 @@
-[]
+- name: Clear Zero Amounts
+  webhook: '{{ACTION_BASE_URL}}/caching/clear'
+  schedule: '*/10 * * * *'
+  include_in_metadata: true
+  payload: {}
+  headers:
+  - name: authorization
+    value_from_env: WEBHOOK_API_KEY

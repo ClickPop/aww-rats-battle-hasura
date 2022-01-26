@@ -1,14 +1,28 @@
 actions:
+- name: attempt_solo_encounter
+  definition:
+    kind: synchronous
+    handler: '{{ACTION_BASE_URL}}/solo-encounter-attempt'
+    headers:
+    - name: authorization
+      value_from_env: WEBHOOK_API_KEY
+  permissions:
+  - role: user
 - name: login
   definition:
     kind: synchronous
     handler: '{{ACTION_BASE_URL}}/auth/login'
+    headers:
+    - name: authorization
+      value_from_env: WEBHOOK_API_KEY
   permissions:
   - role: user
   - role: anonymous
 custom_types:
   enums: []
-  input_objects: []
+  input_objects:
+  - name: SoloEncounterAttemptInput
   objects:
   - name: LoginOutput
+  - name: SoloEncounterAttemptResult
   scalars: []

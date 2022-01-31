@@ -2,6 +2,21 @@ table:
   name: rattributes
   schema: public
 is_enum: true
+array_relationships:
+- name: encounter_resistances
+  using:
+    foreign_key_constraint_on:
+      column: resistance
+      table:
+        name: encounter_resistance
+        schema: public
+- name: encounter_weaknesses
+  using:
+    foreign_key_constraint_on:
+      column: weakness
+      table:
+        name: encounter_weakness
+        schema: public
 select_permissions:
 - permission:
     columns:

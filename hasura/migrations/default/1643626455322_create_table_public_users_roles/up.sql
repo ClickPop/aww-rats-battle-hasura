@@ -1,0 +1,1 @@
+CREATE TABLE "public"."users_roles" ("wallet" text NOT NULL, "role" text NOT NULL, PRIMARY KEY ("wallet") , FOREIGN KEY ("role") REFERENCES "public"."roles"("role") ON UPDATE restrict ON DELETE restrict);

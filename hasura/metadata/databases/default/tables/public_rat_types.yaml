@@ -23,3 +23,8 @@ select_permissions:
     - rat_type
     filter: {}
   role: anonymous
+- permission:
+    columns:
+    - rat_type
+    filter: {}
+  role: user

@@ -15,4 +15,6 @@
 - "!include public_rats.yaml"
 - "!include public_rattributes.yaml"
 - "!include public_rewards.yaml"
+- "!include public_roles.yaml"
 - "!include public_solo_encounter_results.yaml"
+- "!include public_users_roles.yaml"

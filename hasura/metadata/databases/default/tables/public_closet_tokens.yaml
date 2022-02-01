@@ -4,7 +4,13 @@ table:
 object_relationships:
 - name: closet_piece
   using:
-    foreign_key_constraint_on: token_id
+    manual_configuration:
+      column_mapping:
+        token_id: id
+      insertion_order: null
+      remote_table:
+        name: closet_pieces
+        schema: public
 - name: player
   using:
     manual_configuration:
@@ -14,3 +20,18 @@ object_relationships:
       remote_table:
         name: players
         schema: public
+select_permissions:
+- permission:
+    columns:
+    - amount
+    - token_id
+    - owner
+    filter: {}
+  role: anonymous
+- permission:
+    columns:
+    - amount
+    - token_id
+    - owner
+    filter: {}
+  role: user

@@ -14,41 +14,40 @@ object_relationships:
 select_permissions:
 - permission:
     columns:
-    - id
-    - owner
-    - name
-    - description
-    - image
-    - background
-    - tail
-    - ears
-    - pet
-    - hand
-    - color
-    - markings
-    - head
-    - generation
-    - snout
-    - torso
-    - shirt
-    - eyes
-    - glasses
     - accessory
-    - hat
-    - rattitude
+    - background
+    - color
     - cunning
     - cuteness
+    - description
+    - ears
+    - eyes
+    - generation
+    - glasses
+    - hand
+    - hat
+    - head
+    - id
+    - image
+    - markings
+    - name
+    - owner
+    - pet
+    - rattitude
+    - shirt
+    - snout
+    - tail
+    - torso
+    - type
     filter: {}
   role: anonymous
 - permission:
     columns:
-    - id
-    - cunning
-    - cuteness
-    - rattitude
     - accessory
     - background
     - color
+    - cunning
+    - cuteness
     - description
     - ears
     - eyes
@@ -57,14 +56,17 @@ select_permissions:
     - hand
     - hat
     - head
+    - id
     - image
     - markings
     - name
     - owner
     - pet
+    - rattitude
     - shirt
     - snout
     - tail
     - torso
+    - type
     filter: {}
   role: user

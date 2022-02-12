@@ -18,7 +18,11 @@ input SoloEncounterAttemptInput {
 }
 
 type LoginOutput {
-  authorized: Boolean!
+  id: String!
+  energy: Int!
+  max_energy: Int!
+  xp: Int!
+  level: Int!
 }
 
 type SoloEncounterAttemptResult {

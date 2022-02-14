@@ -3,6 +3,7 @@ actions:
   definition:
     kind: synchronous
     handler: '{{ACTION_BASE_URL}}/solo-encounter-attempt'
+    forward_client_headers: true
     headers:
     - name: authorization
       value_from_env: WEBHOOK_API_KEY
@@ -12,6 +13,7 @@ actions:
   definition:
     kind: synchronous
     handler: '{{ACTION_BASE_URL}}/auth/login'
+    forward_client_headers: true
     headers:
     - name: authorization
       value_from_env: WEBHOOK_API_KEY
@@ -20,8 +22,7 @@ actions:
   - role: anonymous
 custom_types:
   enums: []
-  input_objects:
-  - name: SoloEncounterAttemptInput
+  input_objects: []
   objects:
   - name: LoginOutput
   - name: SoloEncounterAttemptResult

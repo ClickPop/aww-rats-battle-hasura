@@ -21,6 +21,11 @@ type LoginOutput {
 }
 
 type SoloEncounterAttemptResult {
+  result_id: Int!
+  encounter_id: Int!
   result: Boolean!
+  player_id: String!
+  energy: Int!
+  xp: Int!
 }
 

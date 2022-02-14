@@ -6,3 +6,11 @@
   headers:
   - name: authorization
     value_from_env: WEBHOOK_API_KEY
+- name: Reset Energy Daily
+  webhook: '{{ACTION_BASE_URL}}/cron/reset-energy'
+  schedule: 0 0 * * *
+  include_in_metadata: true
+  payload: {}
+  headers:
+  - name: authorization
+    value_from_env: WEBHOOK_API_KEY

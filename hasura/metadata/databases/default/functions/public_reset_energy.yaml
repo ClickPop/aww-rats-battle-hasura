@@ -1,0 +1,6 @@
+function:
+  name: reset_energy
+  schema: public
+configuration:
+  custom_root_fields: {}
+  exposed_as: mutation

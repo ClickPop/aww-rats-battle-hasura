@@ -1,0 +1,9 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- CREATE OR REPLACE FUNCTION reset_energy()
+-- RETURNS SETOF players
+-- AS $$
+--   UPDATE players SET energy = max_energy WHERE energy < max_energy RETURNING *
+-- $$
+--  LANGUAGE SQL
+--  VOLATILE;

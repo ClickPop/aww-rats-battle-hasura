@@ -13,6 +13,7 @@ object_relationships:
         schema: public
 select_permissions:
 - permission:
+    allow_aggregations: true
     columns:
     - accessory
     - background
@@ -42,6 +43,7 @@ select_permissions:
     filter: {}
   role: anonymous
 - permission:
+    allow_aggregations: true
     columns:
     - accessory
     - background

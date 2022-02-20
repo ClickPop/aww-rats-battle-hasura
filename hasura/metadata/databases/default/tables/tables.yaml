@@ -5,6 +5,7 @@
 - "!include public_encounter_types.yaml"
 - "!include public_encounter_weakness.yaml"
 - "!include public_encounters.yaml"
+- "!include public_external_contracts.yaml"
 - "!include public_gauntlet_attempts.yaml"
 - "!include public_gauntlet_encounters.yaml"
 - "!include public_gauntlets.yaml"
@@ -17,4 +18,5 @@
 - "!include public_rewards.yaml"
 - "!include public_roles.yaml"
 - "!include public_solo_encounter_results.yaml"
+- "!include public_token_types.yaml"
 - "!include public_users_roles.yaml"

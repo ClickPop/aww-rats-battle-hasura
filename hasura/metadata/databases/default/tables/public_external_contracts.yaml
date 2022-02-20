@@ -1,0 +1,32 @@
+table:
+  name: external_contracts
+  schema: public
+object_relationships:
+- name: token_type
+  using:
+    foreign_key_constraint_on: token
+array_relationships:
+- name: encounter_rat_constraints
+  using:
+    foreign_key_constraint_on:
+      column: external_contract_address
+      table:
+        name: encounter_rat_constraints
+        schema: public
+select_permissions:
+- permission:
+    columns:
+    - address
+    - name
+    - token
+    - url
+    filter: {}
+  role: anonymous
+- permission:
+    columns:
+    - address
+    - name
+    - token
+    - url
+    filter: {}
+  role: user

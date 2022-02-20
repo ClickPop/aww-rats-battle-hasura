@@ -1,0 +1,1 @@
+CREATE TABLE "public"."external_contracts" ("address" text NOT NULL, "name" Text NOT NULL, "token" text NOT NULL, "url" text, PRIMARY KEY ("address") , FOREIGN KEY ("token") REFERENCES "public"."token_types"("token_type") ON UPDATE no action ON DELETE no action);

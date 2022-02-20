@@ -5,6 +5,9 @@ object_relationships:
 - name: encounter
   using:
     foreign_key_constraint_on: encounter_id
+- name: external_contract
+  using:
+    foreign_key_constraint_on: external_contract_address
 - name: ratTypeByRatType
   using:
     foreign_key_constraint_on: rat_type
@@ -12,6 +15,7 @@ select_permissions:
 - permission:
     columns:
     - encounter_id
+    - external_contract_address
     - locked_slots
     - rat_type
     filter: {}
@@ -19,6 +23,7 @@ select_permissions:
 - permission:
     columns:
     - encounter_id
+    - external_contract_address
     - locked_slots
     - rat_type
     filter: {}

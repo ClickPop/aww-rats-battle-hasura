@@ -11,27 +11,38 @@ array_relationships:
       remote_table:
         name: closet_tokens
         schema: public
+computed_fields:
+- comment: Get number of owned tokens
+  definition:
+    function:
+      name: user_closet_tokens_sum
+      schema: public
+    session_argument: hasura_session
+    table_argument: closet_pieces_row
+  name: user_closet_tokens_count
 select_permissions:
 - permission:
     allow_aggregations: true
     columns:
-    - id
     - cost
-    - max_tokens
+    - id
     - max_per_wallet
-    - name
-    - rev_share_address
-    - rev_share_amount
-    - piece_type
-    - collection
-    - sponsor
-    - sponsor_url
-    - rattitude
+    - max_tokens
+    - active
     - cunning
     - cuteness
+    - rattitude
+    - rev_share_amount
+    - collection
     - description
     - image
-    - active
+    - name
+    - piece_type
+    - rev_share_address
+    - sponsor
+    - sponsor_url
+    computed_fields:
+    - user_closet_tokens_count
     filter: {}
   role: anonymous
 - permission:
@@ -54,5 +65,7 @@ select_permissions:
     - rev_share_address
     - sponsor
     - sponsor_url
+    computed_fields:
+    - user_closet_tokens_count
     filter: {}
   role: user

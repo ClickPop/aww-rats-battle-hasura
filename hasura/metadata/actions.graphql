@@ -5,6 +5,10 @@ type Mutation {
   ): SoloEncounterAttemptResult
 }
 
+type Query {
+  checkAuth: AuthOutput!
+}
+
 type Mutation {
   login(
     wallet: String!
@@ -27,5 +31,10 @@ type SoloEncounterAttemptResult {
   player_id: String!
   energy: Int!
   xp: Int!
+}
+
+type AuthOutput {
+  id: String
+  role: String!
 }
 

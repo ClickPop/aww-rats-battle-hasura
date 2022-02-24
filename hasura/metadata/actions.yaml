@@ -9,6 +9,13 @@ actions:
       value_from_env: WEBHOOK_API_KEY
   permissions:
   - role: user
+- name: checkAuth
+  definition:
+    kind: ""
+    handler: '{{ACTION_BASE_URL}}/auth-check'
+  permissions:
+  - role: user
+  - role: anonymous
 - name: login
   definition:
     kind: synchronous
@@ -26,4 +33,5 @@ custom_types:
   objects:
   - name: LoginOutput
   - name: SoloEncounterAttemptResult
+  - name: AuthOutput
   scalars: []

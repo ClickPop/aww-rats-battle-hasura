@@ -60,6 +60,7 @@ select_permissions:
     - id
     - level
     - max_energy
+    - tokens
     - updated_at
     - xp
     filter:

@@ -1,5 +1,6 @@
 - "!include public_closet_pieces.yaml"
 - "!include public_closet_tokens.yaml"
+- "!include public_encounter_environments.yaml"
 - "!include public_encounter_rat_constraints.yaml"
 - "!include public_encounter_resistance.yaml"
 - "!include public_encounter_types.yaml"

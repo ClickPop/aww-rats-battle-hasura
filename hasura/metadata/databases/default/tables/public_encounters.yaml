@@ -5,6 +5,9 @@ object_relationships:
 - name: encounterTypeByEncounterType
   using:
     foreign_key_constraint_on: encounter_type
+- name: encounter_environment
+  using:
+    foreign_key_constraint_on: environment
 - name: reward
   using:
     foreign_key_constraint_on: reward_id
@@ -61,37 +64,43 @@ array_relationships:
 select_permissions:
 - permission:
     columns:
-    - active
-    - created_at
-    - description
-    - encounter_type
-    - energy_cost
     - id
-    - image
-    - loss_text
-    - max_rats
-    - name
+    - energy_cost
     - power
-    - reward_id
-    - updated_at
+    - name
+    - description
     - win_text
+    - loss_text
+    - image
+    - active
+    - encounter_type
+    - created_at
+    - updated_at
+    - reward_id
+    - max_rats
+    - success_image
+    - fail_image
+    - environment
     filter: {}
   role: anonymous
 - permission:
     columns:
     - active
-    - created_at
-    - description
-    - encounter_type
     - energy_cost
     - id
-    - image
-    - loss_text
     - max_rats
-    - name
     - power
     - reward_id
-    - updated_at
+    - description
+    - encounter_type
+    - environment
+    - fail_image
+    - image
+    - loss_text
+    - name
+    - success_image
     - win_text
+    - created_at
+    - updated_at
     filter: {}
   role: user

@@ -1,4 +1,13 @@
 actions:
+- name: add_raid_contribution
+  definition:
+    kind: synchronous
+    handler: '{{ACTION_BASE_URL}}/add-raid-contribution'
+    headers:
+    - name: authorization
+      value_from_env: WEBHOOK_API_KEY
+  permissions:
+  - role: user
 - name: attempt_solo_encounter
   definition:
     kind: synchronous
@@ -34,4 +43,5 @@ custom_types:
   - name: LoginOutput
   - name: SoloEncounterAttemptResult
   - name: AuthOutput
+  - name: RaidContributionResult
   scalars: []

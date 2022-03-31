@@ -43,3 +43,25 @@ select_permissions:
     - updated_at
     filter: {}
   role: user
+event_triggers:
+- definition:
+    delete:
+      columns: "*"
+    enable_manual: true
+    insert:
+      columns: "*"
+    update:
+      columns:
+      - active
+      - id
+      - end_event_id
+      - end_timestamp
+  headers:
+  - name: authorization
+    value_from_env: WEBHOOK_API_KEY
+  name: add_end_raid_trigger
+  retry_conf:
+    interval_sec: 10
+    num_retries: 0
+    timeout_sec: 60
+  webhook: "{{ACTION_BASE_URL}}/handle-raid-trigger"

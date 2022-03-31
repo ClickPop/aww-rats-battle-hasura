@@ -20,48 +20,51 @@ select_permissions:
 - permission:
     columns:
     - active
-    - result
-    - encounter_id
-    - id
-    - reward_id
     - created_at
+    - encounter_id
+    - end_event_id
     - end_timestamp
+    - id
+    - result
+    - reward_id
     - start_timestamp
     - updated_at
+    - winning_faction
     filter: {}
   role: anonymous
 - permission:
     columns:
     - active
-    - result
-    - encounter_id
-    - id
-    - reward_id
     - created_at
+    - encounter_id
+    - end_event_id
     - end_timestamp
+    - id
+    - result
+    - reward_id
     - start_timestamp
     - updated_at
+    - winning_faction
     filter: {}
   role: user
 event_triggers:
 - definition:
     delete:
       columns: "*"
-    enable_manual: true
+    enable_manual: false
     insert:
       columns: "*"
     update:
       columns:
       - active
       - id
-      - end_event_id
       - end_timestamp
   headers:
   - name: authorization
     value_from_env: WEBHOOK_API_KEY
-  name: add_end_raid_trigger
+  name: add-raid-end-event
   retry_conf:
     interval_sec: 10
     num_retries: 0
     timeout_sec: 60
-  webhook: "{{ACTION_BASE_URL}}/handle-raid-trigger"
+  webhook: "{{ACTION_BASE_URL}}/cron/handle-raid-trigger"

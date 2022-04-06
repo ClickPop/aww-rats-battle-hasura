@@ -24,7 +24,7 @@ jobs:
         run: cd hasura && hasura migrate apply && hasura metadata apply
         env:
           HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}
-  Deploy-FUnctions:
+  Deploy-Functions:
     runs-on: 'ubuntu-latest'
     steps:
       - name: Checkout repo
@@ -43,15 +43,18 @@ jobs:
         uses: google-github-actions/setup-gcloud@v0
       - name: Install deps
         run: pnpm i
+        working-directory: ./functions
       - name: Deploy dev
         if: ${{contains(github.ref, 'development')}}
         run: pnpm run deploy:dev
+        working-directory: ./functions
         env:
           HASURA_BASE_URL: ${{ secrets.HASURA_BASE_URL_DEV }}
           HASURA_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET_DEV }}
       - name: Deploy prod
         if: ${{contains(github.ref, 'main')}}
         run: pnpm run deploy
+        working-directory: ./functions
         env:
           HASURA_BASE_URL: ${{ secrets.HASURA_BASE_URL }}
           HASURA_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}

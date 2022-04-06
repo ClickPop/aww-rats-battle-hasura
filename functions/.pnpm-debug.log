@@ -1,0 +1,21 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 error pnpm": {
+    "code": "ELIFECYCLE",
+    "errno": "ENOENT",
+    "syscall": "spawn",
+    "file": "sh",
+    "pkgid": "rat-battle-auth@1.0.0",
+    "stage": "codegen",
+    "script": "graphql-codegen",
+    "pkgname": "rat-battle-auth",
+    "err": {
+      "name": "pnpm",
+      "message": "rat-battle-auth@1.0.0 codegen: `graphql-codegen`\nspawn ENOENT",
+      "code": "ELIFECYCLE",
+      "stack": "pnpm: rat-battle-auth@1.0.0 codegen: `graphql-codegen`\nspawn ENOENT\n    at ChildProcess.<anonymous> (/Users/gvqz/.nvm/versions/node/v14.17.0/pnpm-global/5/node_modules/.pnpm/pnpm@6.27.1/node_modules/pnpm/dist/pnpm.cjs:91972:22)\n    at ChildProcess.emit (events.js:376:20)\n    at maybeClose (internal/child_process.js:1055:16)\n    at Process.ChildProcess._handle.onexit (internal/child_process.js:288:5)"
+    }
+  }
+}

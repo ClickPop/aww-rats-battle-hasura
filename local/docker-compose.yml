@@ -21,3 +21,17 @@ services:
     restart: always
     env_file:
       - .env
+  aww-rats-functions-service:
+    container_name: aww-rats-functions-service
+    command: pnpm dev
+    depends_on:
+      - "aww-rats-graphql-engine"
+    build:
+      context: ../functions
+      dockerfile: Dockerfile
+    volumes:
+      - ../functions/functions:/home/node/app/functions
+      - ../functions/src:/home/node/app/src
+    restart: always
+    env_file:
+        - .env

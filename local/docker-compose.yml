@@ -1,13 +1,15 @@
 version: '3.6'
 services:
-  postgres:
+  aww-rats-postgres:
+    container_name: aww-rats-postgres
     image: postgres:12
     restart: always
     volumes:
     - ./db_data/:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: postgrespassword
-  graphql-engine:
+  aww-rats-graphql-engine:
+    container_name: aww-rats-graphql-engine
     image: hasura/graphql-engine:v2.1.1.cli-migrations-v3
     volumes:
       - ../hasura/migrations:/hasura-migrations
@@ -15,7 +17,21 @@ services:
     ports:
     - "8080:8080"
     depends_on:
-    - "postgres"
+    - "aww-rats-postgres"
     restart: always
     env_file:
       - .env
+  aww-rats-functions-service:
+    container_name: aww-rats-functions-service
+    command: pnpm dev
+    depends_on:
+      - "aww-rats-graphql-engine"
+    build:
+      context: ../functions
+      dockerfile: Dockerfile
+    volumes:
+      - ../functions/functions:/home/node/app/functions
+      - ../functions/src:/home/node/app/src
+    restart: always
+    env_file:
+        - .env

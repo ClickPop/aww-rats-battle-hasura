@@ -22,6 +22,7 @@ actions:
   definition:
     kind: ""
     handler: '{{ACTION_BASE_URL}}/auth-check'
+    forward_client_headers: true
   permissions:
   - role: user
   - role: anonymous
